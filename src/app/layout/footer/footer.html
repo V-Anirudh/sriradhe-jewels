@@ -1,0 +1,148 @@
+<!-- Newsletter + Trust Section -->
+<section class="footer-cta">
+  <div class="container">
+    <div class="cta-inner">
+      <div class="cta-content">
+        <span class="cta-label">Stay Radiant</span>
+        <h3 class="cta-title">Join Our Inner Circle</h3>
+        <p class="cta-text">Be the first to discover new collections, exclusive offers, and jewellery inspiration.</p>
+      </div>
+      <form class="cta-form" (submit)="$event.preventDefault()">
+        <div class="cta-input-group">
+          <input type="email" placeholder="Enter your email address" class="cta-input" required>
+          <button type="submit" class="btn-primary btn-lg">Subscribe</button>
+        </div>
+        <p class="cta-disclaimer">By subscribing, you agree to our Privacy Policy. Unsubscribe anytime.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Trust Badges -->
+<section class="trust-section">
+  <div class="container">
+    <div class="trust-grid">
+      <div class="trust-item">
+        <div class="trust-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h4>BIS Hallmarked</h4>
+        <p>100% certified purity guarantee</p>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <h4>Expert Artisans</h4>
+        <p>Handcrafted by master jewellers</p>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="m16 8 5 3-5 3z"/></svg>
+        </div>
+        <h4>Free Shipping</h4>
+        <p>Insured delivery across India</p>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M23 12a11.05 11.05 0 0 0-22 0zm-5 7a3 3 0 0 1-6 0"/><line x1="12" y1="2" x2="12" y2="6"/></svg>
+        </div>
+        <h4>15-Day Returns</h4>
+        <p>Hassle-free return policy</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Main Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <!-- Brand Column -->
+      <div class="footer-brand">
+        <a routerLink="/" class="footer-logo">
+          <span class="footer-logo-icon">◈</span>
+          <div>
+            <span class="footer-logo-brand">Shree Radheya</span>
+            <span class="footer-logo-sub">J E W E L L E R S</span>
+          </div>
+        </a>
+        <p class="footer-tagline">Crafting timeless jewellery that celebrates India's rich heritage with modern elegance. Each piece tells a story of artistry, purity, and devotion.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Instagram" class="social-link">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="#" aria-label="Facebook" class="social-link">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="#" aria-label="Pinterest" class="social-link">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 12c0-2.2 1.8-4 4-4s4 1.8 4 4-1.8 4-4 4"/><path d="M9 18l2-6"/></svg>
+          </a>
+          <a href="#" aria-label="YouTube" class="social-link">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="4"/><polygon points="10,8 16,12 10,16"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="footer-links">
+        <h4 class="footer-heading">Quick Links</h4>
+        <ul>
+          <li><a routerLink="/collections">All Collections</a></li>
+          <li><a routerLink="/collections" [queryParams]="{filter: 'new'}">New Arrivals</a></li>
+          <li><a routerLink="/collections" [queryParams]="{filter: 'bestseller'}">Bestsellers</a></li>
+          <li><a routerLink="/custom-jewellery">Custom Design</a></li>
+          <li><a routerLink="/about">Our Story</a></li>
+          <li><a routerLink="/contact">Store Locator</a></li>
+        </ul>
+      </div>
+
+      <!-- Categories -->
+      <div class="footer-links">
+        <h4 class="footer-heading">Categories</h4>
+        <ul>
+          <li><a routerLink="/collections" [queryParams]="{category: 'necklaces'}">Necklaces</a></li>
+          <li><a routerLink="/collections" [queryParams]="{category: 'earrings'}">Earrings</a></li>
+          <li><a routerLink="/collections" [queryParams]="{category: 'bangles'}">Bangles</a></li>
+          <li><a routerLink="/collections" [queryParams]="{category: 'rings'}">Rings</a></li>
+          <li><a routerLink="/collections" [queryParams]="{category: 'bridal-sets'}">Bridal Sets</a></li>
+          <li><a routerLink="/collections" [queryParams]="{category: 'mangalsutra'}">Mangalsutra</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div class="footer-links">
+        <h4 class="footer-heading">Get in Touch</h4>
+        <div class="footer-contact">
+          <p>
+            <strong>Flagship Store</strong><br>
+            1-18-4/2 Plot No 6, Dr. AS Rao Nagar<br>
+            Hyderabad
+          </p>
+          <p>
+            <a href="tel:+918019870128">+91 80198 70128</a><br>
+            <a href="mailto:shreeradheyajewellers&#64;gmail.com">shreeradheyajewellers&#64;gmail.com</a>
+          </p>
+          <p>
+            <strong>Hours</strong><br>
+            Mon – Sat: 10 AM – 8 PM<br>
+            Sunday: 11 AM – 6 PM
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="footer-bottom">
+      <p class="footer-copyright">
+        &copy; {{ currentYear }} Shree Radheya Jewellers. All rights reserved. Made with devotion in India.
+      </p>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Shipping Policy</a>
+        <a href="#">Refund Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>

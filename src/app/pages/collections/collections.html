@@ -1,0 +1,81 @@
+<!-- Page Banner -->
+<section class="page-banner">
+  <div class="banner-bg">
+    <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=1600&h=400&fit=crop"
+         alt="Collections" loading="eager">
+  </div>
+  <div class="banner-overlay"></div>
+  <div class="banner-content container">
+    <span class="banner-label">✦ Our Collections</span>
+    <h1 class="banner-title">Exquisite Jewellery</h1>
+    <p class="banner-subtitle">Discover handcrafted masterpieces in gold, diamonds, and precious gemstones — each a testament to artistry</p>
+  </div>
+</section>
+
+<!-- Filters & Products -->
+<section class="section collection-section">
+  <div class="container">
+    <!-- Filter Bar -->
+    <div class="filter-bar">
+      <div class="filter-categories">
+        @for (cat of categories; track cat.value) {
+          <button
+            class="filter-chip"
+            [class.active]="selectedCategory() === cat.value"
+            (click)="setCategory(cat.value)">
+            {{ cat.label }}
+          </button>
+        }
+      </div>
+
+      <div class="filter-controls">
+        <div class="filter-group">
+          <label>Metal</label>
+          <select class="filter-select" (change)="setMetal($any($event.target).value)">
+            @for (m of metals; track m.value) {
+              <option [value]="m.value" [selected]="selectedMetal() === m.value">{{ m.label }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label>Sort By</label>
+          <select class="filter-select" (change)="setSort($any($event.target).value)">
+            <option value="featured">Featured</option>
+            <option value="newest">Newest First</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+            <option value="rating">Top Rated</option>
+          </select>
+        </div>
+
+        <button class="view-toggle" (click)="toggleView()" [attr.aria-label]="'Switch to ' + (viewMode() === 'grid' ? 'large' : 'grid') + ' view'">
+          @if (viewMode() === 'grid') {
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          } @else {
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="7"/><rect x="3" y="14" width="18" height="7"/></svg>
+          }
+        </button>
+      </div>
+    </div>
+
+    <!-- Results Count -->
+    <div class="results-info">
+      <span>Showing <strong>{{ filteredProducts().length }}</strong> pieces</span>
+    </div>
+
+    <!-- Products Grid -->
+    <div class="products-grid stagger-children" [class.large-view]="viewMode() === 'large'">
+      @for (product of filteredProducts(); track product.id) {
+        <app-product-card [product]="product" />
+      } @empty {
+        <div class="empty-state">
+          <div class="empty-icon">◈</div>
+          <h3>No pieces found</h3>
+          <p>Try adjusting your filters to discover more creations.</p>
+          <button class="btn-outline" (click)="setCategory('all'); setMetal('all')">Clear Filters</button>
+        </div>
+      }
+    </div>
+  </div>
+</section>

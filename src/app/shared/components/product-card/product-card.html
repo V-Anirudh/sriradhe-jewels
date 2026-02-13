@@ -1,0 +1,59 @@
+<a [routerLink]="['/product', product.slug]" class="product-card">
+  <!-- Image Container -->
+  <div class="product-image-wrapper">
+    <img
+      [src]="product.thumbnail"
+      [alt]="product.name"
+      class="product-image"
+      loading="lazy">
+
+    <!-- Badges -->
+    <div class="product-badges">
+      @if (product.isNew) {
+        <span class="badge badge-new">New</span>
+      }
+      @if (product.discount) {
+        <span class="badge badge-sale">-{{ product.discount }}%</span>
+      }
+      @if (product.isBestseller && !product.isNew) {
+        <span class="badge badge-best">Bestseller</span>
+      }
+    </div>
+
+    <!-- Wishlist Button -->
+    <button
+      class="wishlist-btn"
+      [class.active]="isWishlisted"
+      (click)="toggleWishlist($event)"
+      [attr.aria-label]="isWishlisted ? 'Remove from wishlist' : 'Add to wishlist'">
+      <svg width="18" height="18" viewBox="0 0 24 24" [attr.fill]="isWishlisted ? 'currentColor' : 'none'" stroke="currentColor" stroke-width="1.5">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+      </svg>
+    </button>
+
+    <!-- Inquire -->
+    @if (showQuickAdd) {
+      <div class="product-quick-actions">
+        <button class="quick-add-btn" (click)="addToInquiry($event)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+          Inquire Now
+        </button>
+      </div>
+    }
+  </div>
+
+  <!-- Product Info -->
+  <div class="product-info">
+    <span class="product-category">{{ product.subcategory | titlecase }} · {{ product.purity }}</span>
+    <h3 class="product-name">{{ product.name }}</h3>
+    <div class="product-rating">
+      @for (star of [1,2,3,4,5]; track star) {
+        <span class="star" [class.filled]="star <= product.rating">★</span>
+      }
+      <span class="review-count">({{ product.reviewCount }})</span>
+    </div>
+    <span class="price-on-request">Price on Request</span>
+  </div>
+</a>

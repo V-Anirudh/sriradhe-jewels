@@ -1,0 +1,268 @@
+<!-- ═══════════════════════════════════════════════════════════
+     HERO SECTION — Cinematic Full-Screen Slider
+     ═══════════════════════════════════════════════════════════ -->
+<section class="hero" aria-label="Featured Collections">
+  @for (slide of heroSlides; track slide.label; let i = $index) {
+    <div class="hero-slide" [class.active]="currentSlide() === i">
+      <div class="hero-bg">
+        <img [src]="slide.image" [alt]="slide.label" loading="eager">
+      </div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content container">
+        <span class="hero-label">{{ slide.label }}</span>
+        <h1 class="hero-title">{{ slide.title }}</h1>
+        <p class="hero-subtitle">{{ slide.subtitle }}</p>
+        <div class="hero-actions">
+          <a [routerLink]="slide.link" [queryParams]="slide.queryParams" class="btn-primary btn-lg">
+            {{ slide.cta }}
+          </a>
+          <a routerLink="/collections" class="btn-outline-light btn-lg">
+            View All Collections
+          </a>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- Slide Controls -->
+  <div class="hero-controls container">
+    <div class="hero-dots">
+      @for (slide of heroSlides; track slide.label; let i = $index) {
+        <button
+          class="hero-dot"
+          [class.active]="currentSlide() === i"
+          (click)="goToSlide(i)"
+          [attr.aria-label]="'Go to slide ' + (i + 1)">
+        </button>
+      }
+    </div>
+    <div class="hero-nav">
+      <button class="hero-nav-btn" (click)="prevSlide()" aria-label="Previous slide">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <span class="hero-counter">{{ currentSlide() + 1 }} / {{ heroSlides.length }}</span>
+      <button class="hero-nav-btn" (click)="nextSlide()" aria-label="Next slide">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Scroll Indicator -->
+  <div class="scroll-indicator">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     CATEGORIES — The Collections (Tab-Filtered Gallery)
+     ═══════════════════════════════════════════════════════════ -->
+<section class="section collections-tab-section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title collections-tab-title">The Collections</h2>
+    </div>
+
+    <!-- Category Tabs -->
+    <nav class="category-tabs" aria-label="Filter by category">
+      @for (tab of categoryTabs; track tab.slug) {
+        <button
+          class="category-tab"
+          [class.active]="selectedCategory() === tab.slug"
+          (click)="selectCategory(tab.slug)">
+          {{ tab.label }}
+        </button>
+      }
+    </nav>
+
+    <!-- Filtered Products Grid -->
+    <div class="category-products-grid stagger-children">
+      @for (product of filteredCategoryProducts(); track product.id) {
+        <app-product-card [product]="product" />
+      } @empty {
+        <div class="category-empty">
+          <span class="category-empty-icon">◈</span>
+          <p>Pieces coming soon for this collection.</p>
+        </div>
+      }
+    </div>
+
+    <div class="section-cta">
+      <a routerLink="/collections" [queryParams]="selectedCategory() !== 'all' ? { category: selectedCategory() } : {}" class="btn-outline">View All Pieces</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     FEATURED COLLECTIONS — Cinematic Showcase
+     ═══════════════════════════════════════════════════════════ -->
+<section class="section featured-section" style="background: var(--bg-secondary);">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">✦ Signature Collections</span>
+      <h2 class="section-title">Curated Masterpieces</h2>
+      <p class="section-subtitle">Each collection tells a unique story of Indian craftsmanship, heritage, and timeless beauty \u2014 pieces destined to become heirlooms</p>
+    </div>
+
+    <div class="collections-showcase">
+      @for (col of productService.featuredCollections(); track col.id; let i = $index) {
+        <a [routerLink]="['/collections']" [queryParams]="{collection: col.slug}"
+           class="collection-card" [class.large]="i === 0">
+          <img [src]="col.image" [alt]="col.name" loading="lazy">
+          <div class="collection-overlay"></div>
+          <div class="collection-content">
+            <span class="collection-count">{{ col.productCount }} Pieces</span>
+            <h3 class="collection-name">{{ col.name }}</h3>
+            <p class="collection-desc">{{ col.description }}</p>
+            <span class="collection-link">
+              Explore Collection
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+            </span>
+          </div>
+        </a>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     HERITAGE STORY — Luxury Storytelling Band
+     ═══════════════════════════════════════════════════════════ -->
+<section class="heritage-section">
+  <div class="heritage-bg">
+    <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=1600&h=700&fit=crop"
+         alt="Master craftsman at work" loading="lazy">
+  </div>
+  <div class="heritage-overlay"></div>
+  <div class="heritage-content container">
+    <span class="heritage-label">✦ Our Heritage</span>
+    <h2 class="heritage-title">Three Generations of<br>Masterful Artistry</h2>
+    <p class="heritage-text">
+      Shree Radheya Jewellers has been crafting heirloom-quality jewellery 
+      that weaves together ancient Indian techniques with contemporary design. 
+      Every piece is a testament to our unwavering commitment to purity, 
+      craftsmanship, and the sacred art of Indian jewellery making \u2014 a legacy 
+      that transforms precious metals into wearable poetry.
+    </p>
+    <div class="heritage-stats">
+      <div class="heritage-stat">
+        <span class="stat-number">60+</span>
+        <span class="stat-label">Years of Legacy</span>
+      </div>
+      <div class="heritage-stat">
+        <span class="stat-number">50K+</span>
+        <span class="stat-label">Happy Customers</span>
+      </div>
+      <div class="heritage-stat">
+        <span class="stat-number">200+</span>
+        <span class="stat-label">Master Artisans</span>
+      </div>
+      <div class="heritage-stat">
+        <span class="stat-number">100%</span>
+        <span class="stat-label">BIS Hallmarked</span>
+      </div>
+    </div>
+    <a routerLink="/about" class="btn-outline-light btn-lg">Discover Our Story</a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     TESTIMONIALS — Customer Stories
+     ═══════════════════════════════════════════════════════════ -->
+<section class="section testimonials-section" style="background: var(--bg-secondary);">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">✦ Cherished Words</span>
+      <h2 class="section-title">What Our Patrons Say</h2>
+    </div>
+
+    <div class="testimonials-grid">
+      @for (review of productService.testimonials(); track review.id) {
+        <div class="testimonial-card">
+          <div class="testimonial-stars">
+            @for (star of [1,2,3,4,5]; track star) {
+              <span class="star" [class.filled]="star <= review.rating">★</span>
+            }
+          </div>
+          <p class="testimonial-text">"{{ review.text }}"</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">{{ review.name.charAt(0) }}</div>
+            <div>
+              <strong class="author-name">{{ review.name }}</strong>
+              <span class="author-location">{{ review.location }}</span>
+            </div>
+          </div>
+          @if (review.product) {
+            <span class="testimonial-product">Purchased: {{ review.product }}</span>
+          }
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     CUSTOM JEWELLERY CTA
+     ═══════════════════════════════════════════════════════════ -->
+<section class="custom-cta-section">
+  <div class="container">
+    <div class="custom-cta-inner">
+      <div class="custom-cta-content">
+        <span class="custom-cta-label">✦ Bespoke Creations</span>
+        <h2 class="custom-cta-title">Design Your Dream Jewellery</h2>
+        <p class="custom-cta-text">
+          Collaborate with our master artisans to create a one-of-a-kind piece 
+          that perfectly captures your vision. From engagement rings to bridal sets, 
+          we bring your imagination to life in precious metals and gemstones \u2014 
+          where your story becomes our craft.
+        </p>
+        <a routerLink="/custom-jewellery" class="btn-primary btn-lg">Start Your Design</a>
+      </div>
+      <div class="custom-cta-image">
+        <img src="https://images.unsplash.com/photo-1573408301185-9146fe634ad0?w=600&h=500&fit=crop"
+             alt="Custom jewellery design" loading="lazy">
+        <div class="custom-cta-badge">
+          <span class="badge-icon">◈</span>
+          <span>Made Just<br>For You</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     BLOG / JOURNAL
+     ═══════════════════════════════════════════════════════════ -->
+<section class="section blog-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">✦ The Journal</span>
+      <h2 class="section-title">Stories & Insights</h2>
+      <p class="section-subtitle">Explore the world of Indian jewellery \u2014 heritage, artistry, and the stories that make each piece extraordinary</p>
+    </div>
+
+    <div class="blog-grid stagger-children">
+      @for (post of productService.blogPosts(); track post.id) {
+        <article class="blog-card">
+          <div class="blog-image-wrapper">
+            <img [src]="post.image" [alt]="post.title" loading="lazy">
+          </div>
+          <div class="blog-content">
+            <div class="blog-meta">
+              <span class="blog-category">{{ post.category }}</span>
+              <span class="blog-read">{{ post.readTime }} read</span>
+            </div>
+            <h3 class="blog-title">{{ post.title }}</h3>
+            <p class="blog-excerpt">{{ post.excerpt }}</p>
+            <span class="blog-link">
+              Read More
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+            </span>
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,186 @@
+<!-- Page Banner -->
+<section class="page-banner">
+  <div class="banner-bg">
+    <img src="https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?w=1600&h=400&fit=crop"
+         alt="Send Inquiry" loading="eager">
+  </div>
+  <div class="banner-overlay"></div>
+  <div class="banner-content container">
+    <span class="banner-label">Inquiry</span>
+    <h1 class="banner-title">Send Your Inquiry</h1>
+    <p class="banner-subtitle">Share your details and we’ll get back to you with personalised pricing</p>
+  </div>
+</section>
+
+<section class="section checkout-section">
+  <div class="container">
+    <div class="checkout-layout">
+      <!-- Main Content -->
+      <div class="checkout-main">
+        @if (!inquirySubmitted()) {
+          <div class="checkout-card">
+            <h2 class="card-title">Your Contact Details</h2>
+            <p class="card-subtitle">Fill in your details and our jewellery consultant will reach out to you.</p>
+            <form class="shipping-form" (submit)="submitInquiry($event)">
+              <div class="form-group full-width">
+                <label for="fullName">Full Name <span class="required">*</span></label>
+                <input type="text" id="fullName" placeholder="Enter your full name"
+                       [value]="inquiryForm().fullName" (input)="updateField('fullName', $event)" required>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="phone">Phone Number <span class="required">*</span></label>
+                  <input type="tel" id="phone" placeholder="+91 XXXXX XXXXX"
+                         [value]="inquiryForm().phone" (input)="updateField('phone', $event)" required>
+                </div>
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input type="email" id="email" placeholder="your.email&#64;example.com"
+                         [value]="inquiryForm().email" (input)="updateField('email', $event)">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="city">City</label>
+                  <input type="text" id="city" placeholder="Your city"
+                         [value]="inquiryForm().city" (input)="updateField('city', $event)">
+                </div>
+                <div class="form-group">
+                  <label for="state">State</label>
+                  <select id="state" (change)="updateField('state', $event)">
+                    <option value="" disabled selected>Select state</option>
+                    @for (state of states; track state) {
+                      <option [value]="state">{{ state }}</option>
+                    }
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group full-width">
+                <label for="message">Message / Requirements</label>
+                <textarea id="message" rows="4" placeholder="Tell us about your requirements — preferred size, customization, budget range, occasion, etc."
+                          [value]="inquiryForm().message" (input)="updateField('message', $event)"></textarea>
+              </div>
+
+              <!-- Inquiry Mode -->
+              <div class="form-group full-width">
+                <label>How would you like to inquire? <span class="required">*</span></label>
+                <div class="inquiry-mode-options">
+                  <label class="inquiry-mode-card" [class.active]="inquiryMode() === 'visit-store'">
+                    <input type="radio" name="inquiryMode" value="visit-store"
+                           [checked]="inquiryMode() === 'visit-store'"
+                           (change)="inquiryMode.set('visit-store')">
+                    <span class="mode-icon">
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    </span>
+                    <span class="mode-label">Visit Store</span>
+                    <span class="mode-desc">Walk in to our showroom</span>
+                  </label>
+                  <label class="inquiry-mode-card" [class.active]="inquiryMode() === 'video-call'">
+                    <input type="radio" name="inquiryMode" value="video-call"
+                           [checked]="inquiryMode() === 'video-call'"
+                           (change)="inquiryMode.set('video-call')">
+                    <span class="mode-icon">
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+                    </span>
+                    <span class="mode-label">Video Call</span>
+                    <span class="mode-desc">Book a virtual consultation</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Video Call Timing (conditional) -->
+              @if (inquiryMode() === 'video-call') {
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="preferredDate">Preferred Date <span class="required">*</span></label>
+                    <input type="date" id="preferredDate" [value]="inquiryForm().preferredDate" (input)="updateField('preferredDate', $event)" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="preferredTime">Preferred Time <span class="required">*</span></label>
+                    <input type="time" id="preferredTime" [value]="inquiryForm().preferredTime" (input)="updateField('preferredTime', $event)" required>
+                  </div>
+                </div>
+              }
+
+              <div class="form-actions">
+                <a routerLink="/cart" class="btn-outline">← Back to Interests</a>
+                <button type="submit" class="btn-primary">Send Inquiry</button>
+              </div>
+            </form>
+          </div>
+        } @else {
+          <!-- Confirmation -->
+          <div class="checkout-card confirmation-card">
+            <div class="confirmation-icon">✓</div>
+            <h2 class="confirmation-title">Inquiry Sent Successfully!</h2>
+            <p class="confirmation-text">
+              Thank you for your interest in our jewellery. Our team will review your selected pieces and contact you shortly with personalised pricing and availability details.
+            </p>
+            <div class="order-number">
+              <span class="order-label">Inquiry Reference</span>
+              <span class="order-id">#SRJ-INQ-{{ inquiryRef() }}</span>
+            </div>
+            <p class="confirmation-note">
+              We typically respond within 2-4 business hours during working days. For urgent queries, please call us directly.
+            </p>
+            <div class="confirmation-actions">
+              <a routerLink="/" class="btn-primary">Back to Home</a>
+              <a routerLink="/collections" class="btn-outline">Continue Browsing</a>
+            </div>
+          </div>
+        }
+      </div>
+
+      <!-- Pieces Sidebar -->
+      @if (!inquirySubmitted()) {
+        <div class="checkout-sidebar">
+          <div class="summary-card">
+            <h3 class="summary-title">Selected Pieces</h3>
+
+            <div class="summary-items">
+              @for (item of items(); track item.product.id) {
+                <div class="summary-item">
+                  <div class="summary-item-image">
+                    <img [src]="item.product.thumbnail" [alt]="item.product.name">
+                  </div>
+                  <div class="summary-item-info">
+                    <span class="summary-item-name">{{ item.product.name }}</span>
+                    <span class="summary-item-meta">{{ item.product.purity }} · {{ item.product.weight }}</span>
+                  </div>
+                </div>
+              }
+            </div>
+
+            <div class="summary-count">
+              <span>{{ items().length }} {{ items().length === 1 ? 'piece' : 'pieces' }} selected</span>
+              <span class="summary-price-note">Price on Request</span>
+            </div>
+
+            <!-- Trust Badges -->
+            <div class="trust-badges">
+              <div class="badge-item">
+                <span class="badge-icon">🔒</span>
+                <span>Secure & Private</span>
+              </div>
+              <div class="badge-item">
+                <span class="badge-icon">✦</span>
+                <span>BIS Hallmarked</span>
+              </div>
+              <div class="badge-item">
+                <span class="badge-icon">📞</span>
+                <span>Personal Consultation</span>
+              </div>
+              <div class="badge-item">
+                <span class="badge-icon">📦</span>
+                <span>Insured Shipping</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
