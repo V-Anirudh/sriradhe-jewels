@@ -1,0 +1,99 @@
+<!-- Page Banner -->
+<section class="page-banner">
+  <div class="banner-bg">
+    <img src="https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?w=1600&h=400&fit=crop"
+         alt="Your Interests" loading="eager">
+  </div>
+  <div class="banner-overlay"></div>
+  <div class="banner-content container">
+    <span class="banner-label">Your Interests</span>
+    <h1 class="banner-title">Pieces You Love</h1>
+    <p class="banner-subtitle">Review your selected pieces and send us an inquiry</p>
+  </div>
+</section>
+
+<section class="section cart-section">
+  <div class="container">
+    @if (isEmpty()) {
+      <!-- Empty State -->
+      <div class="empty-cart">
+        <div class="empty-icon">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+        </div>
+        <h2 class="empty-title">No Pieces Selected</h2>
+        <p class="empty-text">Browse our collections and express interest in pieces you love. We’ll get back to you with pricing and availability.</p>
+        <a routerLink="/collections" class="btn-primary">Browse Collections</a>
+      </div>
+    } @else {
+      <!-- Inquiry Content -->
+      <div class="cart-layout">
+        <!-- Interested Items -->
+        <div class="cart-items">
+          <div class="cart-header">
+            <h2>Interested Pieces ({{ items().length }})</h2>
+            <button class="clear-btn" (click)="clearCart()">Clear All</button>
+          </div>
+
+          @for (item of items(); track item.product.id) {
+            <div class="cart-item">
+              <div class="item-image">
+                <img [src]="item.product.thumbnail" [alt]="item.product.name">
+              </div>
+              <div class="item-details">
+                <div class="item-info">
+                  <a [routerLink]="['/product', item.product.slug]" class="item-name">{{ item.product.name }}</a>
+                  <p class="item-meta">
+                    <span class="item-metal">{{ item.product.metal | titlecase }}</span>
+                    <span class="item-purity">{{ item.product.purity }}</span>
+                  </p>
+                  <span class="item-sku">SKU: {{ item.product.sku }}</span>
+                  <span class="item-price-request">Price on Request</span>
+                </div>
+                <div class="item-actions">
+                  <button class="remove-btn" (click)="removeItem(item.product.id)" aria-label="Remove item">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                      <path d="M3 6h18"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+
+        <!-- Inquiry Sidebar -->
+        <div class="order-summary">
+          <div class="summary-card">
+            <h3 class="summary-title">Send Inquiry</h3>
+            <p class="summary-note">Our team will contact you with pricing and availability for your selected pieces.</p>
+
+            <div class="summary-pieces">
+              <span class="summary-pieces-count">{{ items().length }} {{ items().length === 1 ? 'piece' : 'pieces' }} selected</span>
+            </div>
+
+            <div class="summary-trust">
+              <div class="trust-item">
+                <span class="trust-icon">✨</span>
+                <span>Personalised Pricing</span>
+              </div>
+              <div class="trust-item">
+                <span class="trust-icon">✦</span>
+                <span>BIS Hallmarked</span>
+              </div>
+              <div class="trust-item">
+                <span class="trust-icon">📦</span>
+                <span>Insured Delivery</span>
+              </div>
+            </div>
+
+            <a routerLink="/checkout" class="btn-primary checkout-btn">Proceed to Inquiry</a>
+
+            <a routerLink="/collections" class="continue-link">← Continue Browsing</a>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</section>
