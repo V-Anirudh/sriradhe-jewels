@@ -5,6 +5,17 @@ import { Product, Collection, GoldRate, Testimonial, BlogPost } from '../models/
 /** 1 troy ounce = 31.1035 grams */
 const TROY_OZ_TO_GRAM = 31.1035;
 
+/**
+ * Indian market adjustment factor.
+ * International spot price → Indian quoted gold rate (ex-GST):
+ *   - Customs Duty (BCD): 6%
+ *   - Agriculture Infrastructure Development Cess (AIDC): 1%
+ *   - Bullion market premium: ~1.5% (dealer margin, logistics)
+ * Note: GST (3%) is NOT included — it is charged separately at point of sale.
+ * Factor = (1 + 0.06 + 0.01) × (1 + 0.015) = 1.07 × 1.015 ≈ 1.086
+ */
+const INDIA_DUTY_FACTOR = 1.07 * 1.015; // ≈ 1.086
+
 /** Refresh interval: 15 minutes in milliseconds */
 const RATE_REFRESH_INTERVAL = 15 * 60 * 1000;
 
@@ -88,8 +99,8 @@ export class ProductService implements OnDestroy {
             const data = response.items[0];
             const now = new Date();
 
-            // ── Gold per gram (24K) from troy oz price ──
-            const gold24KPerGram = data.xauPrice / TROY_OZ_TO_GRAM;
+            // ── Gold per gram (24K) from troy oz price, adjusted for Indian duties ──
+            const gold24KPerGram = (data.xauPrice / TROY_OZ_TO_GRAM) * INDIA_DUTY_FACTOR;
             const gold22KPerGram = gold24KPerGram * (22 / 24);
             const gold18KPerGram = gold24KPerGram * (18 / 24);
 
