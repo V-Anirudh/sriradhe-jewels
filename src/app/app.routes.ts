@@ -42,6 +42,26 @@ export const routes: Routes = [
     title: 'Send Inquiry — Sree Radheya Jewellers'
   },
   {
+    path: 'privacy-policy',
+    loadComponent: () => import('./pages/privacy-policy/privacy-policy').then(m => m.PrivacyPolicyComponent),
+    title: 'Privacy Policy — Sree Radheya Jewellers'
+  },
+  {
+    path: 'terms-of-service',
+    loadComponent: () => import('./pages/terms-of-service/terms-of-service').then(m => m.TermsOfServiceComponent),
+    title: 'Terms of Service — Sree Radheya Jewellers'
+  },
+  {
+    path: 'shipping-policy',
+    loadComponent: () => import('./pages/shipping-policy/shipping-policy').then(m => m.ShippingPolicyComponent),
+    title: 'Shipping Policy — Sree Radheya Jewellers'
+  },
+  {
+    path: 'refund-policy',
+    loadComponent: () => import('./pages/refund-policy/refund-policy').then(m => m.RefundPolicyComponent),
+    title: 'Refund Policy — Sree Radheya Jewellers'
+  },
+  {
     path: '**',
     redirectTo: ''
   }

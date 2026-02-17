@@ -31,8 +31,8 @@ export class ContactComponent {
   storeInfo = {
     address: '1-18-4/2 Plot No 6, Dr. AS Rao Nagar',
     city: 'Hyderabad',
-    phone: '+91 80198 70128',
-    mobile: '+91 80198 70128',
+    phone: '+91 9010800400',
+    mobile: '+91 9010800400',
     email: 'shreeradheyajewellers@gmail.com',
     hours: [
       { days: 'Monday – Saturday', time: '10:00 AM – 8:00 PM' },

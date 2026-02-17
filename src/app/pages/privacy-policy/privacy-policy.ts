@@ -1,0 +1,13 @@
+import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
+
+@Component({
+  selector: 'app-privacy-policy',
+  standalone: true,
+  imports: [RouterLink],
+  templateUrl: './privacy-policy.html',
+  styleUrl: './privacy-policy.scss'
+})
+export class PrivacyPolicyComponent {
+  lastUpdated = 'February 1, 2026';
+}
