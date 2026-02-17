@@ -33,7 +33,7 @@ export class ContactComponent {
     city: 'Hyderabad',
     phone: '+91 9010800400',
     mobile: '+91 9010800400',
-    email: 'shreeradheyajewellers@gmail.com',
+    email: 'Connect@sreeradheyajewellers.com',
     hours: [
       { days: 'Monday – Saturday', time: '10:00 AM – 8:00 PM' },
       { days: 'Sunday', time: '11:00 AM – 6:00 PM' },
