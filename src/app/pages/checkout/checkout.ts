@@ -53,7 +53,7 @@ export class CheckoutComponent {
     const ref = new Date().toISOString().slice(0, 10).replace(/-/g, '') + '-' + Math.floor(1000 + Math.random() * 9000);
     this.inquiryRef.set(ref);
 
-    console.log('[Shree Radheya Jewellers] Inquiry submitted:', {
+    console.log('[Sree Radheya Jewellers] Inquiry submitted:', {
       ...form,
       inquiryMode: this.inquiryMode(),
       pieces: this.items().map(i => ({ name: i.product.name, sku: i.product.sku })),

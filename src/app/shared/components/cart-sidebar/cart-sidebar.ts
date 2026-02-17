@@ -137,7 +137,7 @@ import { TitleCasePipe } from '@angular/common';
 
       .cart-empty-icon {
         font-size: 3rem;
-        color: var(--gold-500);
+        color: var(--maroon-500);
         opacity: 0.3;
       }
 
@@ -189,7 +189,7 @@ import { TitleCasePipe } from '@angular/common';
         font-weight: 500;
         letter-spacing: 0.06em;
         text-transform: uppercase;
-        color: var(--gold-600);
+        color: var(--maroon-600);
       }
 
       .cart-item-remove {

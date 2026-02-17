@@ -75,7 +75,7 @@ export class ProductDetailComponent {
     const p = this.product();
     if (!form.name || !form.phone || !p) return;
 
-    console.log('[Shree Radheya Jewellers] Inquiry submitted:', {
+    console.log('[Sree Radheya Jewellers] Inquiry submitted:', {
       product: p.name,
       sku: p.sku,
       inquiryMode: this.inquiryMode(),

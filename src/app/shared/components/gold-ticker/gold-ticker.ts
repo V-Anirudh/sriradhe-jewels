@@ -45,7 +45,7 @@ import { DecimalPipe, DatePipe } from '@angular/common';
       display: flex;
       align-items: center;
       background: var(--neutral-900);
-      border-top: 1px solid rgba(123,79,53,0.15);
+      border-top: 1px solid rgba(107,21,48,0.15);
       overflow: hidden;
       height: 38px;
     }
@@ -58,11 +58,11 @@ import { DecimalPipe, DatePipe } from '@angular/common';
       font-size: 0.6rem;
       font-weight: 600;
       letter-spacing: 0.2em;
-      color: var(--gold-300);
+      color: var(--cream-300);
       white-space: nowrap;
       background: var(--bg-dark);
       height: 100%;
-      border-right: 1px solid rgba(123,79,53,0.15);
+      border-right: 1px solid rgba(107,21,48,0.15);
       z-index: 1;
     }
 
