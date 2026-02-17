@@ -136,12 +136,12 @@ export class ProductService implements OnDestroy {
 
             this._goldRates.set(liveRates);
             this._ratesError.set(null);
-            console.log('[Shree Radheya Jewellers] ✅ Live rates updated at', now.toLocaleTimeString());
+            console.log('[Sree Radheya Jewellers] ✅ Live rates updated at', now.toLocaleTimeString());
           }
           this._ratesLoading.set(false);
         },
         error: (err) => {
-          console.warn('[Shree Radheya Jewellers] ⚠️ Could not fetch live rates, using fallback.', err);
+          console.warn('[Sree Radheya Jewellers] ⚠️ Could not fetch live rates, using fallback.', err);
           this._ratesError.set('Using last known rates');
           this._ratesLoading.set(false);
           // Keep existing rates (fallback already set as initial value)
@@ -306,7 +306,7 @@ const FALLBACK_RATES: GoldRate[] = [
 ];
 
 const MOCK_TESTIMONIALS: Testimonial[] = [
-  { id: '1', name: 'Priya Sharma', location: 'Mumbai', avatar: '', rating: 5, text: 'My bridal set from Shree Radheya Jewellers was absolutely stunning. The craftsmanship is beyond anything I\'ve seen. Every detail was perfect for my special day.', product: 'Bridal Kundan Set', date: '2025-12' },
+  { id: '1', name: 'Priya Sharma', location: 'Mumbai', avatar: '', rating: 5, text: 'My bridal set from Sree Radheya Jewellers was absolutely stunning. The craftsmanship is beyond anything I\'ve seen. Every detail was perfect for my special day.', product: 'Bridal Kundan Set', date: '2025-12' },
   { id: '2', name: 'Ananya Krishnamurthy', location: 'Chennai', avatar: '', rating: 5, text: 'The temple jewellery collection is authentic and beautifully crafted. I received so many compliments at my sister\'s wedding. Truly heirloom quality.', product: 'Temple Necklace Set', date: '2025-11' },
   { id: '3', name: 'Ritu Agarwal', location: 'Delhi', avatar: '', rating: 5, text: 'I ordered a custom engagement ring and the experience was magical. The team understood exactly what I wanted and delivered beyond my expectations.', product: 'Custom Solitaire Ring', date: '2026-01' },
   { id: '4', name: 'Meera Patel', location: 'Ahmedabad', avatar: '', rating: 4, text: 'Beautiful meenakari bangles with vibrant colors. The gold quality is exceptional and the enamel work is flawless. A treasure for my collection.', product: 'Meenakari Bangles', date: '2025-10' }

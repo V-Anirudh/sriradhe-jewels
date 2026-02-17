@@ -57,45 +57,6 @@
 
 
 <!-- ═══════════════════════════════════════════════════════════
-     CATEGORIES — The Collections (Tab-Filtered Gallery)
-     ═══════════════════════════════════════════════════════════ -->
-<section class="section collections-tab-section">
-  <div class="container">
-    <div class="section-header">
-      <h2 class="section-title collections-tab-title">The Collections</h2>
-    </div>
-
-    <!-- Category Tabs -->
-    <nav class="category-tabs" aria-label="Filter by category">
-      @for (tab of categoryTabs; track tab.slug) {
-        <button
-          class="category-tab"
-          [class.active]="selectedCategory() === tab.slug"
-          (click)="selectCategory(tab.slug)">
-          {{ tab.label }}
-        </button>
-      }
-    </nav>
-
-    <!-- Filtered Products Grid -->
-    <div class="category-products-grid stagger-children">
-      @for (product of filteredCategoryProducts(); track product.id) {
-        <app-product-card [product]="product" />
-      } @empty {
-        <div class="category-empty">
-          <span class="category-empty-icon">◈</span>
-          <p>Pieces coming soon for this collection.</p>
-        </div>
-      }
-    </div>
-
-    <div class="section-cta">
-      <a routerLink="/collections" [queryParams]="selectedCategory() !== 'all' ? { category: selectedCategory() } : {}" class="btn-outline">View All Pieces</a>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════════
      FEATURED COLLECTIONS — Cinematic Showcase
      ═══════════════════════════════════════════════════════════ -->
 <section class="section featured-section" style="background: var(--bg-secondary);">
@@ -122,82 +83,6 @@
             </span>
           </div>
         </a>
-      }
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════════
-     HERITAGE STORY — Luxury Storytelling Band
-     ═══════════════════════════════════════════════════════════ -->
-<section class="heritage-section">
-  <div class="heritage-bg">
-    <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=1600&h=700&fit=crop"
-         alt="Master craftsman at work" loading="lazy">
-  </div>
-  <div class="heritage-overlay"></div>
-  <div class="heritage-content container">
-    <span class="heritage-label">✦ Our Heritage</span>
-    <h2 class="heritage-title">Three Generations of<br>Masterful Artistry</h2>
-    <p class="heritage-text">
-      Shree Radheya Jewellers has been crafting heirloom-quality jewellery 
-      that weaves together ancient Indian techniques with contemporary design. 
-      Every piece is a testament to our unwavering commitment to purity, 
-      craftsmanship, and the sacred art of Indian jewellery making \u2014 a legacy 
-      that transforms precious metals into wearable poetry.
-    </p>
-    <div class="heritage-stats">
-      <div class="heritage-stat">
-        <span class="stat-number">60+</span>
-        <span class="stat-label">Years of Legacy</span>
-      </div>
-      <div class="heritage-stat">
-        <span class="stat-number">50K+</span>
-        <span class="stat-label">Happy Customers</span>
-      </div>
-      <div class="heritage-stat">
-        <span class="stat-number">200+</span>
-        <span class="stat-label">Master Artisans</span>
-      </div>
-      <div class="heritage-stat">
-        <span class="stat-number">100%</span>
-        <span class="stat-label">BIS Hallmarked</span>
-      </div>
-    </div>
-    <a routerLink="/about" class="btn-outline-light btn-lg">Discover Our Story</a>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════════
-     TESTIMONIALS — Customer Stories
-     ═══════════════════════════════════════════════════════════ -->
-<section class="section testimonials-section" style="background: var(--bg-secondary);">
-  <div class="container">
-    <div class="section-header">
-      <span class="section-label">✦ Cherished Words</span>
-      <h2 class="section-title">What Our Patrons Say</h2>
-    </div>
-
-    <div class="testimonials-grid">
-      @for (review of productService.testimonials(); track review.id) {
-        <div class="testimonial-card">
-          <div class="testimonial-stars">
-            @for (star of [1,2,3,4,5]; track star) {
-              <span class="star" [class.filled]="star <= review.rating">★</span>
-            }
-          </div>
-          <p class="testimonial-text">"{{ review.text }}"</p>
-          <div class="testimonial-author">
-            <div class="author-avatar">{{ review.name.charAt(0) }}</div>
-            <div>
-              <strong class="author-name">{{ review.name }}</strong>
-              <span class="author-location">{{ review.location }}</span>
-            </div>
-          </div>
-          @if (review.product) {
-            <span class="testimonial-product">Purchased: {{ review.product }}</span>
-          }
-        </div>
       }
     </div>
   </div>

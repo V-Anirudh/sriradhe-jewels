@@ -10,8 +10,9 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent 10%, var(--border-gold) 50%, transparent 90%);
+    height: 2px;
+    background: var(--gradient-maroon-subtle);
+    opacity: 0.5;
   }
 
   .cta-inner {
@@ -33,9 +34,7 @@
     font-weight: 500;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--text-gold);
-    margin-bottom: var(--space-2);
-    display: block;
+    color: var(--text-maroon);
   }
 
   .cta-title {
@@ -76,7 +75,7 @@
 
     &:focus {
       outline: none;
-      border-color: var(--gold-500);
+      border-color: var(--maroon-500);
     }
   }
 
@@ -114,17 +113,17 @@
       width: 64px;
       height: 64px;
       border-radius: var(--radius-full);
-      background: var(--bg-secondary);
-      color: var(--gold-500);
+      background: linear-gradient(135deg, var(--maroon-50) 0%, var(--bg-secondary) 100%);
+      color: var(--maroon-500);
       margin-bottom: var(--space-4);
-      border: 1px solid var(--border-gold);
+      border: 1px solid rgba(107,21,48,0.15);
       transition: all var(--duration-normal) var(--ease-out-expo);
     }
 
     &:hover .trust-icon {
-      background: var(--gold-50);
-      box-shadow: var(--shadow-gold);
-      transform: translateY(-2px);
+      background: linear-gradient(135deg, var(--maroon-100) 0%, var(--maroon-50) 100%);
+      box-shadow: var(--shadow-md), 0 0 20px rgba(107,21,48,0.08);
+      transform: translateY(-3px);
     }
 
     h4 {
@@ -156,8 +155,9 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent 5%, var(--gold-700) 50%, transparent 95%);
+    height: 2px;
+    background: var(--gradient-maroon-subtle);
+    opacity: 0.5;
   }
 }
 
@@ -185,8 +185,15 @@
 
   .footer-logo-icon {
     font-size: 1.75rem;
-    color: var(--gold-300);
-    filter: drop-shadow(0 0 8px rgba(123,79,53,0.15));
+    color: var(--cream-300);
+    filter: drop-shadow(0 0 12px rgba(242,224,201,0.2));
+    animation: goldGlow 4s ease-in-out infinite;
+  }
+
+  .footer-logo-img {
+    height: 36px;
+    width: auto;
+    object-fit: contain;
   }
 
   .footer-logo-brand {
@@ -201,7 +208,7 @@
   .footer-logo-sub {
     font-size: 0.55rem;
     letter-spacing: 0.4em;
-    color: var(--gold-400);
+    color: var(--cream-400);
     display: block;
     margin-top: 3px;
     font-weight: 500;
@@ -228,16 +235,16 @@
   width: 42px;
   height: 42px;
   border-radius: var(--radius-full);
-  border: 1px solid var(--neutral-700);
+  border: 1px solid rgba(242,224,201,0.15);
   color: var(--neutral-400);
   transition: all var(--duration-normal) var(--ease-out-expo);
 
   &:hover {
-    border-color: var(--gold-500);
-    color: var(--gold-300);
-    background: rgba(123, 79, 53, 0.1);
-    box-shadow: 0 0 20px rgba(123,79,53,0.12);
-    transform: translateY(-2px);
+    border-color: var(--cream-400);
+    color: var(--cream-300);
+    background: rgba(242, 224, 201, 0.08);
+    box-shadow: 0 0 20px rgba(242,224,201,0.1);
+    transform: translateY(-3px);
   }
 }
 
@@ -248,9 +255,7 @@
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--gold-400);
-  margin-bottom: var(--space-5);
-  padding-bottom: var(--space-3);
+  color: var(--cream-400);
   position: relative;
 
   &::after {
@@ -259,9 +264,10 @@
     bottom: 0;
     left: 0;
     width: 30px;
-    height: 1px;
-    background: var(--gold-600);
+    height: 2px;
+    background: var(--gradient-maroon-subtle);
     opacity: 0.6;
+    border-radius: 1px;
   }
 }
 
@@ -300,7 +306,7 @@
 
     a {
       color: var(--neutral-400);
-      &:hover { color: var(--gold-400); }
+      &:hover { color: var(--cream-300); }
     }
   }
 }
