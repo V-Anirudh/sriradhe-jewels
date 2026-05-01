@@ -1,4 +1,5 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
+import { EmailService } from '../../core/services/email.service';
 
 @Component({
   selector: 'app-contact',
@@ -8,6 +9,8 @@ import { Component, signal } from '@angular/core';
   styleUrl: './contact.scss'
 })
 export class ContactComponent {
+  private readonly emailService = inject(EmailService);
+
   formData = signal({
     name: '',
     email: '',
@@ -18,6 +21,7 @@ export class ContactComponent {
 
   isSubmitting = signal(false);
   submitted = signal(false);
+  errorMessage = signal('');
 
   subjects = [
     'General Inquiry',
@@ -29,7 +33,7 @@ export class ContactComponent {
   ];
 
   storeInfo = {
-    address: '1-18-4/2 Plot No 6, Dr. AS Rao Nagar',
+    address: '2 Plot, 1-18-4, T Nagar Colony Road No. 1, A. S. Rao Nagar, Hyderabad, Secunderabad, Telangana 500062, India',
     city: 'Hyderabad',
     phone: '+91 9010800400',
     mobile: '+91 9010800400',
@@ -46,13 +50,18 @@ export class ContactComponent {
     this.formData.update(data => ({ ...data, [field]: value }));
   }
 
-  submitForm(): void {
+  async submitForm(): Promise<void> {
     this.isSubmitting.set(true);
-    // Simulate form submission
-    setTimeout(() => {
-      this.isSubmitting.set(false);
+    this.errorMessage.set('');
+
+    try {
+      await this.emailService.sendContactEmail(this.formData());
       this.submitted.set(true);
       this.formData.set({ name: '', email: '', phone: '', subject: '', message: '' });
-    }, 1500);
+    } catch {
+      this.errorMessage.set('Failed to send message. Please try again or email us directly.');
+    } finally {
+      this.isSubmitting.set(false);
+    }
   }
 }
